@@ -2,7 +2,12 @@
 
 import { useState } from 'react';
 
-export default function Hero() {
+interface HeroProps {
+  isYearly: boolean;
+  setIsYearly: (value: boolean) => void;
+}
+
+export default function Hero({ isYearly, setIsYearly }: HeroProps) {
   const [sliderValue] = useState(0);
   const memberCount = '1,000';
 
@@ -43,7 +48,7 @@ export default function Hero() {
             <div className="flex-1 max-w-md mx-auto lg:mx-0 w-full px-4 sm:px-0">
               {/* Tooltip */}
               <div className="relative flex justify-center mb-2">
-                <div 
+                <div
                   className="bg-[#FF247C] text-white text-[12px] sm:text-[13px] font-semibold px-2.5 sm:px-3 py-1 rounded-md relative"
                   style={{ marginLeft: `${sliderValue}%` }}
                 >
@@ -62,12 +67,12 @@ export default function Hero() {
                 </div>
                 <div className="relative h-1.5 bg-[#E5E7EB] rounded-full">
                   {/* Filled portion */}
-                  <div 
+                  <div
                     className="absolute left-0 top-0 h-full bg-[#FF247C] rounded-full opacity-30"
                     style={{ width: '1%' }}
                   />
                   {/* Thumb */}
-                  <div 
+                  <div
                     className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-[#E5E7EB] rounded-full shadow-sm cursor-pointer"
                     style={{ left: '0%' }}
                   />
@@ -75,12 +80,26 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Right: Billing Toggle */}
+            {/* Right: Billing Toggle - Now Functional */}
             <div className="flex items-center justify-center border border-[#E5E7EB] rounded-md overflow-hidden mx-auto lg:mx-0">
-              <button className="px-3 sm:px-4 py-2 text-[13px] sm:text-[14px] text-[#7C8B9A] hover:bg-gray-50 transition-colors whitespace-nowrap">
+              <button
+                onClick={() => setIsYearly(false)}
+                className={`px-3 sm:px-4 py-2 text-[13px] sm:text-[14px] transition-colors whitespace-nowrap ${
+                  !isYearly
+                    ? 'text-[#15171A] bg-white font-medium'
+                    : 'text-[#7C8B9A] hover:bg-gray-50'
+                }`}
+              >
                 Monthly billing
               </button>
-              <button className="px-3 sm:px-4 py-2 text-[13px] sm:text-[14px] text-[#15171A] bg-white border-l border-[#E5E7EB] font-medium whitespace-nowrap">
+              <button
+                onClick={() => setIsYearly(true)}
+                className={`px-3 sm:px-4 py-2 text-[13px] sm:text-[14px] border-l border-[#E5E7EB] transition-colors whitespace-nowrap ${
+                  isYearly
+                    ? 'text-[#15171A] bg-white font-medium'
+                    : 'text-[#7C8B9A] hover:bg-gray-50'
+                }`}
+              >
                 Yearly billing
               </button>
             </div>

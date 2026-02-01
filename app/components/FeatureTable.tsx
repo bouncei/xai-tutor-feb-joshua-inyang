@@ -46,9 +46,9 @@ const Modal: React.FC<ModalProps> = ({ isOpen, onClose, title, content }) => {
 
   return (
     <>
-      {/* Backdrop */}
-      <div 
-        className="fixed inset-0 bg-black bg-opacity-50 z-40"
+      {/* Backdrop - Blurred light overlay like Ghost */}
+      <div
+        className="fixed inset-0 bg-white/80 backdrop-blur-sm z-40"
         onClick={onClose}
       />
       
