@@ -72,7 +72,7 @@ export default function PricingCard({
               </svg>
               <span className="text-[14px] text-[#394047]">{feature.text}</span>
               {feature.isNew && (
-                <span className="bg-[#FF247C] text-white text-[10px] font-bold px-1.5 py-0.5 rounded uppercase">
+                <span className="bg-[#DCFCE7] text-[#166534] text-[10px] font-bold px-1.5 py-0.5 rounded uppercase">
                   NEW
                 </span>
               )}

@@ -22,7 +22,7 @@ export default function CTASection() {
         {/* CTA Button */}
         <Link 
           href="https://account.ghost.org/signup/"
-          className="inline-flex items-center gap-2 bg-white text-[#15171A] py-3 px-6 rounded-[4px] font-medium text-[15px] hover:bg-gray-100 transition-colors"
+          className="inline-flex items-center gap-2 bg-[#FF247C] text-white py-3 px-6 rounded-[4px] font-medium text-[15px] hover:bg-[#E6006E] transition-colors"
         >
           Start publishing now
           <span aria-hidden="true">→</span>

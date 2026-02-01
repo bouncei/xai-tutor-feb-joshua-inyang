@@ -81,7 +81,7 @@ export default function PricingSection() {
   const [isYearly, setIsYearly] = useState(true);
 
   return (
-    <section className="py-8">
+    <section className="py-8 max-w-7xl mx-auto px-6">
       <div className="max-w-7xl mx-auto px-6">
         {/* Pricing Cards Grid */}
         <div className="grid grid-cols-4 gap-5">

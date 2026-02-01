@@ -14,9 +14,9 @@
   --light-text: #FFFFFF;
 
   /* UI Colors */
-  --ghost-blue: #5C8DFF;
-  --green-accent: #30CF43;
-  --green-badge-bg: #E6F9E8;
+  --pink-accent: #FF247C;
+  --green-badge-bg: #DCFCE7;
+  --green-badge-text: #166534;
 
   /* Border Colors */
   --border-light: #E5E7EB;
@@ -34,7 +34,7 @@
   --color-black: #000000;
   --color-white: #FFFFFF;
   --color-ghost-dark: #15171A;
-  --color-ghost-blue: #5C8DFF;
+  --color-pink-accent: #FF247C;
 
   /* Text Colors */
   --color-primary-text: #15171A;
@@ -46,8 +46,8 @@
   --color-border-light: #E5E7EB;
   --color-border-dark: #394047;
   --color-background-gray: #F9FAFB;
-  --color-green-accent: #30CF43;
-  --color-green-badge-bg: #E6F9E8;
+  --color-green-badge-bg: #DCFCE7;
+  --color-green-badge-text: #166534;
 
   /* Button Colors */
   --color-primary-button: #000000;
