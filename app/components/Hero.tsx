@@ -1,56 +1,88 @@
-// components/Hero.tsx
-// Typography: Title 48px/3rem (font-weight 700, line-height 1.1)
-//             Subtitle 18px (text-secondary-text)
-// Layout: Centered content with static slider UI (reference: design.md Hero Section)
+'use client';
+
+import { useState } from 'react';
 
 export default function Hero() {
+  const [sliderValue] = useState(0);
+  const memberCount = '1,000';
+
   return (
-    <section className="py-16 md:py-24">
+    <section className="pt-12 pb-8">
       <div className="max-w-7xl mx-auto px-6">
         {/* Main Content */}
-        <div className="text-center">
-          {/* Hero Title - 48px/3rem, font-weight 700, line-height 1.1 */}
-          <h1 className="text-[3rem] font-bold leading-[1.1] text-primary-text mb-6">
+        <div className="text-center mb-10">
+          {/* Ghost(Pro) Pill Badge */}
+          <div className="inline-block mb-6">
+            <span className="bg-[#F4F5F6] text-[#394047] text-[14px] font-medium px-4 py-2 rounded-full">
+              Ghost(Pro) plans & pricing
+            </span>
+          </div>
+
+          {/* Hero Title */}
+          <h1 className="text-[2.75rem] font-bold leading-[1.15] text-[#15171A] mb-5">
             Launch your creative business
           </h1>
 
-          {/* Subtitle - 18px, text-secondary-text, max-width ~600px */}
-          <p className="text-[18px] text-secondary-text max-w-[600px] mx-auto mb-4 leading-[1.6]">
-            The world&apos;s most popular modern publishing platform for creating a new media platform.
-            Used by Apple, SkyNews, Buffer, OpenAI, and thousands more. Try it free for 14 days.
-          </p>
-
-          {/* Additional info text */}
-          <p className="text-[14px] text-muted-text mb-12">
+          {/* Subtitle */}
+          <p className="text-[18px] text-[#7C8B9A] leading-[1.5]">
             No payment fees — upgrade, downgrade, or cancel anytime.
           </p>
+        </div>
 
-          {/* Audience Slider - Static UI Only */}
-          <div className="max-w-md mx-auto mt-12">
-            {/* Slider Container */}
-            <div className="relative">
-              {/* Labels Container */}
-              <div className="flex justify-between items-center mb-3">
-                <span className="text-[14px] font-medium text-primary-text">0</span>
-                <span className="text-[14px] font-medium text-primary-text">100k+</span>
+        {/* Slider Section */}
+        <div className="max-w-4xl mx-auto">
+          <div className="flex items-center justify-between gap-8">
+            {/* Left: Audience Label */}
+            <div className="text-left whitespace-nowrap">
+              <span className="text-[14px] text-[#7C8B9A]">Based on an audience up to</span>
+              <br />
+              <span className="text-[18px] font-semibold text-[#FF247C]">{memberCount} members</span>
+            </div>
+
+            {/* Center: Slider */}
+            <div className="flex-1 max-w-md">
+              {/* Tooltip */}
+              <div className="relative flex justify-center mb-2">
+                <div 
+                  className="bg-[#FF247C] text-white text-[13px] font-semibold px-3 py-1 rounded-md relative"
+                  style={{ marginLeft: `${sliderValue}%` }}
+                >
+                  {memberCount}
+                  {/* Tooltip Arrow */}
+                  <div className="absolute left-1/2 -translate-x-1/2 -bottom-1 w-0 h-0 border-l-[6px] border-r-[6px] border-t-[6px] border-l-transparent border-r-transparent border-t-[#FF247C]" />
+                </div>
               </div>
 
-              {/* Track */}
-              <div className="relative h-2 bg-border-light rounded-full">
-                {/* Filled Track (left side) */}
-                <div className="absolute left-0 top-0 h-full w-1/2 bg-black rounded-full" />
-
-                {/* Thumb/Indicator */}
-                <div
-                  className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-6 h-6 bg-black rounded-full border-4 border-white shadow-md"
-                  style={{ boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)' }}
-                />
+              {/* Slider Track */}
+              <div className="relative">
+                <div className="flex justify-between items-center mb-2">
+                  <span className="text-[13px] text-[#7C8B9A]">0</span>
+                  <span className="text-[13px] text-[#7C8B9A]">Members</span>
+                  <span className="text-[13px] text-[#7C8B9A]">100k+</span>
+                </div>
+                <div className="relative h-1.5 bg-[#E5E7EB] rounded-full">
+                  {/* Filled portion */}
+                  <div 
+                    className="absolute left-0 top-0 h-full bg-[#FF247C] rounded-full opacity-30"
+                    style={{ width: '1%' }}
+                  />
+                  {/* Thumb */}
+                  <div 
+                    className="absolute top-1/2 -translate-y-1/2 w-4 h-4 bg-white border-2 border-[#E5E7EB] rounded-full shadow-sm cursor-pointer"
+                    style={{ left: '0%' }}
+                  />
+                </div>
               </div>
+            </div>
 
-              {/* Audience Size Label */}
-              <div className="text-center mt-4">
-                <span className="text-[14px] text-secondary-text">Audience Size</span>
-              </div>
+            {/* Right: Billing Toggle */}
+            <div className="flex items-center border border-[#E5E7EB] rounded-md overflow-hidden">
+              <button className="px-4 py-2 text-[14px] text-[#7C8B9A] hover:bg-gray-50 transition-colors">
+                Monthly billing
+              </button>
+              <button className="px-4 py-2 text-[14px] text-[#15171A] bg-white border-l border-[#E5E7EB] font-medium">
+                Yearly billing
+              </button>
             </div>
           </div>
         </div>

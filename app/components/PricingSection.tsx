@@ -3,163 +3,101 @@
 import React, { useState } from 'react';
 import PricingCard from './PricingCard';
 
-/**
- * Type definition for pricing plan data
- */
+type Feature = {
+  text: string;
+  isNew?: boolean;
+};
+
 type PricingPlan = {
   planName: string;
+  subtitle: string;
   monthlyPrice: number | string;
   yearlyPrice: number | string;
-  members: string;
-  features: string[];
-  isMostPopular?: boolean;
+  features: Feature[];
   isCustom?: boolean;
 };
 
-/**
- * Pricing data for all plans
- * Yearly prices are displayed as monthly rates but billed annually
- */
 const pricingPlans: PricingPlan[] = [
   {
-    planName: 'Starter',
-    monthlyPrice: 11,
-    yearlyPrice: 9,
-    members: 'Up to 500 members',
+    planName: 'STARTER',
+    subtitle: 'For solo blogs & newsletters',
+    monthlyPrice: 19,
+    yearlyPrice: 15,
     features: [
-      '1 Staff user',
-      'Up to 500 members',
-      'Unlimited posts',
-      'Basic analytics',
+      { text: 'Your own website' },
+      { text: 'Free custom domain', isNew: true },
+      { text: 'Email newsletter' },
+      { text: 'Simple design settings' },
+      { text: '1,000 members' },
     ],
-    isMostPopular: false,
     isCustom: false,
   },
   {
-    planName: 'Publisher',
-    monthlyPrice: 31,
-    yearlyPrice: 25,
-    members: 'Up to 1,000 members',
+    planName: 'PUBLISHER',
+    subtitle: 'For custom publications',
+    monthlyPrice: 39,
+    yearlyPrice: 29,
     features: [
-      'Unlimited staff users',
-      'Up to 1,000 members',
-      'Unlimited posts',
-      'Advanced analytics',
-      'Custom domain',
+      { text: '3 staff users' },
+      { text: 'Custom themes' },
+      { text: '8,000+ integrations' },
+      { text: 'Paid subscriptions' },
+      { text: 'Advanced analytics' },
+      { text: '1,000 members' },
     ],
-    isMostPopular: true,
     isCustom: false,
   },
   {
-    planName: 'Business',
-    monthlyPrice: 63,
-    yearlyPrice: 50,
-    members: 'Up to 10,000 members',
+    planName: 'BUSINESS',
+    subtitle: 'For teams scaling up',
+    monthlyPrice: 249,
+    yearlyPrice: 199,
     features: [
-      'Everything in Publisher',
-      'Up to 10,000 members',
-      'Priority support',
-      'Advanced integrations',
+      { text: '15 staff users' },
+      { text: 'Priority support' },
+      { text: 'Higher usage limits' },
+      { text: 'Early access to features' },
+      { text: '10,000 members' },
     ],
-    isMostPopular: false,
     isCustom: false,
   },
   {
-    planName: 'Custom',
-    monthlyPrice: 'Contact',
-    yearlyPrice: 'Contact',
-    members: 'Unlimited',
+    planName: 'CUSTOM',
+    subtitle: 'For more complex needs',
+    monthlyPrice: 'Custom',
+    yearlyPrice: 'Custom',
     features: [
-      'Unlimited everything',
-      'Dedicated support',
-      'Custom development',
-      'SLA agreement',
+      { text: 'Unlimited staff users' },
+      { text: 'Advanced configurations' },
+      { text: 'Dedicated IP address' },
+      { text: '99.9% uptime SLA' },
+      { text: 'Unlimited members' },
     ],
-    isMostPopular: false,
     isCustom: true,
   },
 ];
 
-/**
- * PricingSection component
- * Displays pricing cards with a monthly/yearly billing toggle
- *
- * Features:
- * - Interactive billing period toggle (Monthly/Yearly)
- * - 4 pricing tiers with feature lists
- * - Highlights "Most Popular" plan (Publisher)
- * - Responsive grid layout
- */
 export default function PricingSection() {
-  // State to track billing period: true = yearly, false = monthly
-  const [isYearly, setIsYearly] = useState(false);
+  const [isYearly, setIsYearly] = useState(true);
 
   return (
-    <section className="py-20">
-      {/* Section Header */}
-      <div className="text-center mb-12">
-        <h2 className="text-4xl font-bold text-[#15171A] mb-4">
-          Choose your plan
-        </h2>
-        <p className="text-lg text-[#7C8B9A] mb-8">
-          Flexible pricing for every stage of your publishing journey
-        </p>
-
-        {/* Monthly/Yearly Toggle */}
-        <div className="flex justify-center">
-          <div
-            className="bg-[#F3F4F6] p-1 rounded-full inline-flex"
-            role="tablist"
-            aria-label="Billing period selector"
-          >
-            {/* Monthly Tab */}
-            <button
-              className={`py-2 px-6 rounded-full font-medium transition-colors ${
-                !isYearly
-                  ? 'bg-black text-white'
-                  : 'text-[#6B7280] hover:text-[#111827]'
-              }`}
-              onClick={() => setIsYearly(false)}
-              role="tab"
-              aria-selected={!isYearly}
-              aria-label="Monthly billing"
-            >
-              Monthly
-            </button>
-
-            {/* Yearly Tab */}
-            <button
-              className={`py-2 px-6 rounded-full font-medium transition-colors ${
-                isYearly
-                  ? 'bg-black text-white'
-                  : 'text-[#6B7280] hover:text-[#111827]'
-              }`}
-              onClick={() => setIsYearly(true)}
-              role="tab"
-              aria-selected={isYearly}
-              aria-label="Yearly billing"
-            >
-              Yearly
-            </button>
-          </div>
+    <section className="py-8">
+      <div className="max-w-7xl mx-auto px-6">
+        {/* Pricing Cards Grid */}
+        <div className="grid grid-cols-4 gap-5">
+          {pricingPlans.map((plan) => (
+            <PricingCard
+              key={plan.planName}
+              planName={plan.planName}
+              subtitle={plan.subtitle}
+              monthlyPrice={plan.monthlyPrice}
+              yearlyPrice={plan.yearlyPrice}
+              features={plan.features}
+              isYearly={isYearly}
+              isCustom={plan.isCustom}
+            />
+          ))}
         </div>
-      </div>
-
-      {/* Pricing Cards Grid */}
-      <div className="grid grid-cols-4 gap-6">
-        {pricingPlans.map((plan) => (
-          <PricingCard
-            key={plan.planName}
-            planName={plan.planName}
-            monthlyPrice={plan.monthlyPrice}
-            yearlyPrice={plan.yearlyPrice}
-            members={plan.members}
-            features={plan.features}
-            isYearly={isYearly}
-            isMostPopular={plan.isMostPopular}
-            isCustom={plan.isCustom}
-          />
-        ))}
       </div>
     </section>
   );
