@@ -25,7 +25,7 @@ const InfoIcon = () => (
 
 const CheckIcon = () => (
   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-    <path d="M3 8L6.5 11.5L13 5" stroke="#30CF43" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M3 8L6.5 11.5L13 5" stroke="#FF247D" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
   </svg>
 );
 

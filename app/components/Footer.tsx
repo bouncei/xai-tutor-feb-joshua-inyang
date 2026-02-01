@@ -191,7 +191,7 @@ export default function Footer() {
               <li>
                 <Link href="https://status.ghost.org/" className="text-[#7C8B9A] text-[14px] hover:text-[#15171A] transition-colors flex items-center gap-2">
                   Status
-                  <span className="flex items-center gap-1 text-[#30CF43] text-[12px]">
+                  <span className="flex items-center gap-1 text-[#FF247D] text-[12px]">
                     <svg width="8" height="8" viewBox="0 0 8 8" fill="currentColor">
                       <polygon points="4,0 8,8 0,8"/>
                     </svg>
