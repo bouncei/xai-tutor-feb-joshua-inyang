@@ -77,14 +77,87 @@ const pricingPlans: PricingPlan[] = [
   },
 ];
 
+const formatNumber = (num: number): string => {
+  if (num >= 1000) {
+    return `${(num / 1000).toFixed(0)}k`;
+  }
+  return num.toString();
+};
+
 export default function PricingSection() {
   const [isYearly, setIsYearly] = useState(true);
+  const [members, setMembers] = useState(0);
+
+  const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setMembers(Number(e.target.value));
+  };
 
   return (
-    <section className="py-8 max-w-7xl mx-auto px-6">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="py-6 sm:py-8 max-w-7xl mx-auto px-4 sm:px-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Member Slider and Billing Toggle */}
+        <div className="mb-6 sm:mb-8">
+          {/* Member Slider */}
+          <div className="mb-4 sm:mb-6">
+            <label className="block text-center mb-4">
+              <span className="text-[14px] sm:text-[15px] text-[#394047]">Based on an audience up to</span>
+              <div className="mt-2">
+                <span className="text-[14px] sm:text-[15px] font-semibold text-[#15171A]">
+                  {members === 100000 ? '100k+' : formatNumber(members)}
+                </span>
+                <span className="text-[14px] sm:text-[15px] text-[#7C8B9A] ml-1">members</span>
+              </div>
+            </label>
+            <div className="max-w-md mx-auto px-4 sm:px-0">
+              <input
+                type="range"
+                min="0"
+                max="100000"
+                step="1000"
+                value={members}
+                onChange={handleSliderChange}
+                className="w-full h-1 bg-[#E5E7EB] rounded-lg appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-[#15171A] [&::-webkit-slider-thumb]:cursor-pointer [&::-moz-range-thumb]:w-5 [&::-moz-range-thumb]:h-5 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-[#15171A] [&::-moz-range-thumb]:border-0 [&::-moz-range-thumb]:cursor-pointer"
+              />
+            </div>
+          </div>
+
+          {/* Billing Toggle */}
+          <div className="flex items-center justify-center gap-2 sm:gap-3">
+            <button
+              onClick={() => setIsYearly(false)}
+              className={`text-[13px] sm:text-[15px] font-medium transition-colors ${
+                !isYearly ? 'text-[#15171A]' : 'text-[#7C8B9A]'
+              }`}
+            >
+              Monthly billing
+            </button>
+            <button
+              onClick={() => setIsYearly(!isYearly)}
+              className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
+                isYearly ? 'bg-[#15171A]' : 'bg-[#E5E7EB]'
+              }`}
+              role="switch"
+              aria-checked={isYearly}
+            >
+              <span
+                className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${
+                  isYearly ? 'translate-x-6' : 'translate-x-1'
+                }`}
+              />
+            </button>
+            <button
+              onClick={() => setIsYearly(true)}
+              className={`text-[13px] sm:text-[15px] font-medium transition-colors ${
+                isYearly ? 'text-[#15171A]' : 'text-[#7C8B9A]'
+              }`}
+            >
+              Yearly billing
+            </button>
+          </div>
+        </div>
+
         {/* Pricing Cards Grid */}
-        <div className="grid grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
           {pricingPlans.map((plan) => (
             <PricingCard
               key={plan.planName}
